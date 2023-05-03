@@ -22,9 +22,6 @@ const App = () => {
         </div>
         <ContactForm />
       </div>
-      <div className="w-full">
-        <Modal />
-      </div>
     </div>
   );
 };
