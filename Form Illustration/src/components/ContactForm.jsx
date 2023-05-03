@@ -2,15 +2,29 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
+import Modal from "./Modal";
 const ContactForm = () => {
-  const [showpws, setShowpws] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => {
+    setShowModal(true);
+  };
 
+  const editForm = () => {
+    setShowModal(false);
+  };
+
+  const [showpws, setShowpws] = useState(false);
   const togglePassword = () => {
     setShowpws(!showpws);
   };
 
   const validate = (values) => {
     const errors = {};
+
+    if (!values.car) {
+      errors.car = "Required";
+      // Do you Need a Car? or Do you Have a Car?
+    }
 
     if (!values.firstName) {
       errors.firstName = "Required";
@@ -69,7 +83,11 @@ const ContactForm = () => {
     },
     validate,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 500));
+      alert(
+        `You've successfully submitted: ${JSON.stringify(values, null, 500)}`
+      );
+      formik.resetForm();
+      setShowModal(false);
     },
   });
 
@@ -114,6 +132,9 @@ const ContactForm = () => {
               I need a car
             </label>
           </span>
+          {formik.touched.car && formik.errors.car ? (
+            <div className="text-red-500 pt-[0.25rem]">{formik.errors.car}</div>
+          ) : null}
         </section>
         {/* Input field and labels */}
         <div className="flex flex-col w-full py-[0.25rem]">
@@ -305,13 +326,22 @@ const ContactForm = () => {
           phone or SMS(Including by automated means) at the email address or
           number I provide, including for marketing purposes.
         </p>
-        <button className="px-4 py-3 bg-black text-white cursor-pointer">
+        <button
+          onClick={toggleModal}
+          type="button"
+          className="px-4 py-3 bg-black text-white cursor-pointer"
+        >
           Sign up to drive
         </button>
         <span className="block pt-3 text-[0.75rem]">
           Already have an account?{" "}
           <span className="underline cursor-pointer">Sign in</span>
         </span>
+        {showModal && (
+          <div className="w-full min-h-[100vh] fixed top-0 left-0 background">
+            <Modal handleSubmit={formik.handleSubmit} editForm={editForm} />
+          </div>
+        )}
       </form>
     </>
   );
