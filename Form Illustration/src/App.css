@@ -7,3 +7,7 @@
     font-family: 'Segoe UI', sans-serif;
     font-weight: 700;
 }
+
+.trans{
+    transform: translate(-50%, -50%);
+}
