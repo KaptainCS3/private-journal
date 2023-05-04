@@ -25,13 +25,13 @@ const ContactForm = () => {
 
     if (!values.firstName) {
       errors.firstName = "Required";
-    } else if (values.firstName.length > 15) {
+    } else if (values.firstName.length > 15 || values.firstName.length <= 4) {
       errors.firstName = "Must be 15 characters or less";
     }
 
     if (!values.lastName) {
       errors.lastName = "Required";
-    } else if (values.lastName.length > 20) {
+    } else if (values.lastName.length > 20 || values.lastName.length < 4) {
       errors.lastName = "Must be 20 characters or less";
     }
 
@@ -60,7 +60,7 @@ const ContactForm = () => {
 
     if (!values.cityDrive) {
       errors.cityDrive = "Required";
-    } else if (values.cityDrive.length > 20) {
+    } else if (values.cityDrive.length > 20 || values.cityDrive.length <= 4) {
       errors.cityDrive = "Must be 20 characters or less";
     }
 
@@ -92,23 +92,30 @@ const ContactForm = () => {
     setShowModal(
       !!formik.values.car &&
         !(
-          formik.values.firstName.length >= 15 ||
+          (formik.values.firstName.length >= 15 &&
+            formik.values.firstName.length < 4) ||
           !formik.values.firstName.length
+        ) &&
+        !(
+          (formik.values.lastName.length >= 20 &&
+            formik.values.lastName.length < 4) ||
+          !formik.values.lastName.length
         ) &&
         !(
           !formik.values.email ||
           !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formik.values.email)
         ) &&
+        !(formik.values.password.length <= 7 || !formik.values.password) &&
         !(
-          formik.values.lastName.length >= 20 || !formik.values.lastName.length
-        ) &&
-        !(!formik.values.cityDrive || formik.values.cityDrive.length >= 20) &&
-        !(!formik.values.password || formik.values.password.length <= 7) &&
-        !(
-          !formik.values.contact ||
           ((formik.values.contact.length <= 8 ||
             formik.values.contact.length >= 15) &&
-            formik.values.contact.length <= 100)
+            formik.values.contact.length <= 100) ||
+          !formik.values.contact
+        ) &&
+        !(
+          (formik.values.cityDrive.length >= 20 &&
+            formik.values.cityDrive.length < 4) ||
+          !formik.values.cityDrive
         )
         ? true
         : null
@@ -354,11 +361,13 @@ const ContactForm = () => {
           type={
             !!formik.values.car &&
             !(
-              formik.values.firstName.length >= 15 ||
+              (formik.values.firstName.length >= 15 &&
+                formik.values.firstName.length < 4) ||
               !formik.values.firstName.length
             ) &&
             !(
-              formik.values.lastName.length >= 20 ||
+              (formik.values.lastName.length >= 20 &&
+                formik.values.lastName.length < 4) ||
               !formik.values.lastName.length
             ) &&
             !(
@@ -367,14 +376,18 @@ const ContactForm = () => {
                 formik.values.email
               )
             ) &&
-            !(!formik.values.password || formik.values.password.length <= 7) &&
+            !(formik.values.password.length <= 7 || !formik.values.password) &&
             !(
-              !formik.values.contact ||
               ((formik.values.contact.length <= 8 ||
                 formik.values.contact.length >= 15) &&
-                formik.values.contact.length <= 100)
+                formik.values.contact.length <= 100) ||
+              !formik.values.contact
             ) &&
-            !(!formik.values.cityDrive || formik.values.cityDrive.length >= 20)
+            !(
+              (formik.values.cityDrive.length >= 20 &&
+                formik.values.cityDrive.length < 4) ||
+              !formik.values.cityDrive
+            )
               ? "button"
               : "submit"
           }
@@ -389,11 +402,13 @@ const ContactForm = () => {
         {showModal &&
           !!formik.values.car &&
           !(
-            formik.values.firstName.length >= 15 ||
+            (formik.values.firstName.length >= 15 &&
+              formik.values.firstName.length < 4) ||
             !formik.values.firstName.length
           ) &&
           !(
-            formik.values.lastName.length >= 20 ||
+            (formik.values.lastName.length >= 20 &&
+              formik.values.lastName.length < 4) ||
             !formik.values.lastName.length
           ) &&
           !(
@@ -402,12 +417,17 @@ const ContactForm = () => {
               formik.values.email
             )
           ) &&
-          !(!formik.values.password || formik.values.password.length <= 7) &&
+          !(formik.values.password.length <= 7 || !formik.values.password) &&
           !(
-            !formik.values.contact ||
             ((formik.values.contact.length <= 8 ||
               formik.values.contact.length >= 15) &&
-              formik.values.contact.length <= 100)
+              formik.values.contact.length <= 100) ||
+            !formik.values.contact
+          ) &&
+          !(
+            (formik.values.cityDrive.length >= 20 &&
+              formik.values.cityDrive.length < 4) ||
+            !formik.values.cityDrive
           ) &&
           !(
             !formik.values.cityDrive || formik.values.cityDrive.length >= 20
