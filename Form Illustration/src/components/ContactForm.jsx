@@ -5,9 +5,6 @@ import { useFormik } from "formik";
 import Modal from "./Modal";
 const ContactForm = () => {
   const [showModal, setShowModal] = useState(false);
-  const toggleModal = () => {
-    setShowModal(true);
-  };
 
   const editForm = () => {
     setShowModal(false);
@@ -91,6 +88,32 @@ const ContactForm = () => {
     },
   });
 
+  const toggleModal = () => {
+    setShowModal(
+      !!formik.values.car &&
+        !(
+          formik.values.firstName.length >= 15 ||
+          !formik.values.firstName.length
+        ) &&
+        !(
+          !formik.values.email ||
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formik.values.email)
+        ) &&
+        !(
+          formik.values.lastName.length >= 20 || !formik.values.lastName.length
+        ) &&
+        !(!formik.values.cityDrive || formik.values.cityDrive.length >= 20) &&
+        !(!formik.values.password || formik.values.password.length <= 7) &&
+        !(
+          !formik.values.contact ||
+          ((formik.values.contact.length <= 8 ||
+            formik.values.contact.length >= 15) &&
+            formik.values.contact.length <= 100)
+        )
+        ? true
+        : null
+    );
+  };
   return (
     <>
       <form
@@ -328,7 +351,33 @@ const ContactForm = () => {
         </p>
         <button
           onClick={toggleModal}
-          type="button"
+          type={
+            !!formik.values.car &&
+            !(
+              formik.values.firstName.length >= 15 ||
+              !formik.values.firstName.length
+            ) &&
+            !(
+              formik.values.lastName.length >= 20 ||
+              !formik.values.lastName.length
+            ) &&
+            !(
+              !formik.values.email ||
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
+                formik.values.email
+              )
+            ) &&
+            !(!formik.values.password || formik.values.password.length <= 7) &&
+            !(
+              !formik.values.contact ||
+              ((formik.values.contact.length <= 8 ||
+                formik.values.contact.length >= 15) &&
+                formik.values.contact.length <= 100)
+            ) &&
+            !(!formik.values.cityDrive || formik.values.cityDrive.length >= 20)
+              ? "button"
+              : "submit"
+          }
           className="px-4 py-3 bg-black text-white cursor-pointer"
         >
           Sign up to drive
@@ -337,11 +386,36 @@ const ContactForm = () => {
           Already have an account?{" "}
           <span className="underline cursor-pointer">Sign in</span>
         </span>
-        {showModal && (
-          <div className="w-full min-h-[100vh] fixed top-0 left-0 background">
-            <Modal handleSubmit={formik.handleSubmit} editForm={editForm} />
-          </div>
-        )}
+        {showModal &&
+          !!formik.values.car &&
+          !(
+            formik.values.firstName.length >= 15 ||
+            !formik.values.firstName.length
+          ) &&
+          !(
+            formik.values.lastName.length >= 20 ||
+            !formik.values.lastName.length
+          ) &&
+          !(
+            !formik.values.email ||
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
+              formik.values.email
+            )
+          ) &&
+          !(!formik.values.password || formik.values.password.length <= 7) &&
+          !(
+            !formik.values.contact ||
+            ((formik.values.contact.length <= 8 ||
+              formik.values.contact.length >= 15) &&
+              formik.values.contact.length <= 100)
+          ) &&
+          !(
+            !formik.values.cityDrive || formik.values.cityDrive.length >= 20
+          ) && (
+            <div className="w-full min-h-[100vh] fixed top-0 left-0 background">
+              <Modal handleSubmit={formik.handleSubmit} editForm={editForm} />
+            </div>
+          )}
       </form>
     </>
   );
