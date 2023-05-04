@@ -8,6 +8,7 @@ const Modal = (props) => {
           <p className="my-3 font-bold">Are you sure you want to Submit?</p>
           <div className="flex w-[25rem]">
             <button
+            type="submit"
               onSubmit={props.handleSubmit}
               className="p-5 bg-[#f5e8e7] w-1/2 mx-4 text-xl"
             >
