@@ -25,13 +25,13 @@ const ContactForm = () => {
 
     if (!values.firstName) {
       errors.firstName = "Required";
-    } else if (values.firstName.length > 15 || values.firstName.length <= 4) {
+    } else if (values.firstName.length > 15 || values.firstName.length < 3) {
       errors.firstName = "Must be 15 characters or less";
     }
 
     if (!values.lastName) {
       errors.lastName = "Required";
-    } else if (values.lastName.length > 20 || values.lastName.length < 4) {
+    } else if (values.lastName.length > 20 || values.lastName.length < 3) {
       errors.lastName = "Must be 20 characters or less";
     }
 
@@ -60,7 +60,7 @@ const ContactForm = () => {
 
     if (!values.cityDrive) {
       errors.cityDrive = "Required";
-    } else if (values.cityDrive.length > 20 || values.cityDrive.length <= 4) {
+    } else if (values.cityDrive.length > 20 || values.cityDrive.length < 3) {
       errors.cityDrive = "Must be 20 characters or less";
     }
 
@@ -93,12 +93,12 @@ const ContactForm = () => {
       !!formik.values.car &&
         !(
           (formik.values.firstName.length >= 15 &&
-            formik.values.firstName.length < 4) ||
+            formik.values.firstName.length < 3) ||
           !formik.values.firstName.length
         ) &&
         !(
           (formik.values.lastName.length >= 20 &&
-            formik.values.lastName.length < 4) ||
+            formik.values.lastName.length < 3) ||
           !formik.values.lastName.length
         ) &&
         !(
@@ -114,7 +114,7 @@ const ContactForm = () => {
         ) &&
         !(
           (formik.values.cityDrive.length >= 20 &&
-            formik.values.cityDrive.length < 4) ||
+            formik.values.cityDrive.length < 3) ||
           !formik.values.cityDrive
         )
         ? true
@@ -362,12 +362,12 @@ const ContactForm = () => {
             !!formik.values.car &&
             !(
               (formik.values.firstName.length >= 15 &&
-                formik.values.firstName.length < 4) ||
+                formik.values.firstName.length < 3) ||
               !formik.values.firstName.length
             ) &&
             !(
               (formik.values.lastName.length >= 20 &&
-                formik.values.lastName.length < 4) ||
+                formik.values.lastName.length < 3) ||
               !formik.values.lastName.length
             ) &&
             !(
@@ -385,7 +385,7 @@ const ContactForm = () => {
             ) &&
             !(
               (formik.values.cityDrive.length >= 20 &&
-                formik.values.cityDrive.length < 4) ||
+                formik.values.cityDrive.length < 3) ||
               !formik.values.cityDrive
             )
               ? "button"
@@ -403,12 +403,12 @@ const ContactForm = () => {
           !!formik.values.car &&
           !(
             (formik.values.firstName.length >= 15 &&
-              formik.values.firstName.length < 4) ||
+              formik.values.firstName.length < 3) ||
             !formik.values.firstName.length
           ) &&
           !(
             (formik.values.lastName.length >= 20 &&
-              formik.values.lastName.length < 4) ||
+              formik.values.lastName.length < 3) ||
             !formik.values.lastName.length
           ) &&
           !(
@@ -426,7 +426,7 @@ const ContactForm = () => {
           ) &&
           !(
             (formik.values.cityDrive.length >= 20 &&
-              formik.values.cityDrive.length < 4) ||
+              formik.values.cityDrive.length < 3) ||
             !formik.values.cityDrive
           ) &&
           !(
