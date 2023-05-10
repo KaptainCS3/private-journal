@@ -1,0 +1,62 @@
+@import url('https://fonts.cdnfonts.com/css/segoe-ui-4?styles=18006,18004');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.font-text{
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 700;
+}
+
+.trans{
+    transform: translate(-50%, -50%);
+}
+
+.background{
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.4);
+}
+
+.form__input{
+   @apply  flex flex-col w-full py-[0.25rem];
+}
+
+.para__form{
+    @apply text-[0.75rem] py-3;
+}
+
+.label__form{
+    @apply font-medium cursor-pointer mb-[0.25rem];
+}
+
+.have__account{
+    @apply block pt-3 text-[0.75rem];
+}
+
+.signin{
+    @apply underline cursor-pointer;
+}
+
+.input{
+    @apply py-[0.45rem] bg-[#E5E5E5] px-4 outline-none;
+}
+
+.form{
+   @apply py-8 px-8 w-[50%] bg-[#f5f5f5] sm:w-full md:w-full;
+}
+
+.error__message{
+    @apply text-red-500 pt-[0.25rem];
+}
+
+.password{
+    @apply absolute top-0 right-0 mt-[2.75rem] mr-5 cursor-pointer;
+}
+
+.privacy{
+    @apply text-blue-800 underline cursor-pointer;
+}
+
+.label__radio{
+    @apply pl-2 cursor-pointer;
+}
